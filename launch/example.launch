@@ -1,0 +1,6 @@
+<launch>
+
+  <node pkg="example_package" type="publisher_node.py" name="publisher" />
+  <node pkg="example_package" type="subscriber_node.py" name="subscriber" />
+
+</launch>
