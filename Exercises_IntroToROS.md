@@ -77,9 +77,11 @@ Create a new directory called "catkin_ws" using `mkdir catkin_ws`.  Move into th
 
 #### Building the Catkin Workspace
 
-Once the directories have been created we need to "build" the catkin workspace, simply using:  
-`catkin build`  
+Once the directories have been created we need to "make" the catkin workspace, simply using:  
+`catkin_make`  
 Once you have packages and nodes, this process will compile any C++ code and make sure other packages and ROS in general are aware of the packages and nodes.
+
+*:sparkles:ROS Tip - there is also the catkin build tool, which is [regarded as a better tool](https://catkin-tools.readthedocs.io/en/latest/migration.html) than the default catkin_make.  It can be installed with `sudo apt install python3-catkin-tools` in a terminal session*  
 
 #### Sourcing the Workspace
 
@@ -100,7 +102,7 @@ Open terminal
 ```console
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws
-catkin build
+catkin_make
 echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 echo $ROS_PACKAGE_PATH
@@ -142,7 +144,7 @@ Open terminal
 cd ~/catkin_ws/src
 catkin_create_pkg example_package rospy roscpp std_msgs
 cd ..
-catkin_build
+catkin_make
 ```
 Exit terminal
 
