@@ -13,8 +13,8 @@ Enter the command, `rosversion –-distro`, it should return "noetic":
 user@machine:~$ rosversion --distro
 noetic
 ```
-*:exclamation: ==Linux Tip== - use `ctrl+alt+t` to quickly open a new terminal, in a terminal `ctrl+shift+t` opens a new "tab"*  
-*:exclamation: ==Linux Tip== - copy/paste in the terminal requires an additional `shift`, i.e. copy = `ctrl+shift+c`, paste = `ctrl+shift+v`*
+*:exclamation: Linux Tip - use `ctrl+alt+t` to quickly open a new terminal, in a terminal `ctrl+shift+t` opens a new "tab"*  
+*:exclamation: Linux Tip - copy/paste in the terminal requires an additional `shift`, i.e. copy = `ctrl+shift+c`, paste = `ctrl+shift+v`*
 
 Enter the command, `echo $ROS_PACKAGE_PATH`, it should return:  
 ```console
@@ -30,11 +30,11 @@ If it returns with nothing, use the command `source /opt/ros/noetic/setup.bash` 
 
 Once complete, close the terminal using the command `exit`.
 
-*:exclamation: ==Linux Tip== - ensure you use `>>` (append) and not `>` (overwrite)*
-*:exclamation: ==Linux Tip== - tilde (`~`) is shorthand for the "home" directory `/home/username/` (eqivalent to a C:\Users\username\ folder in Windows)*  
-*:exclamation: ==Linux Tip== - your bashrc file contains preferences, variables and code to be run everytime you open a terminal session, including environment variables*  
-*:exclamation: ==Linux Tip== - files or directorys with a leading fullstop (`.`) are hidden files, e.g. `.bashrc`*  
-*:exclamation: ==Linux Tip== - the word "`exit`" will close a terminal if nothing is running*  
+*:exclamation: Linux Tip - ensure you use `>>` (append) and not `>` (overwrite)*  
+*:exclamation: Linux Tip - tilde (`~`) is shorthand for the "home" directory `/home/username/` (eqivalent to a C:\Users\username\ folder in Windows)*  
+*:exclamation: Linux Tip - your bashrc file contains preferences, variables and code to be run everytime you open a terminal session, including environment variables*  
+*:exclamation: Linux Tip - files or directorys with a leading fullstop (`.`) are hidden files, e.g. `.bashrc`*  
+*:exclamation: Linux Tip - the word "`exit`" will close a terminal if nothing is running*  
 
 #### Running ROS {#Preflight_RunningROS}
 
@@ -46,7 +46,7 @@ roscore: command not found
 
 If this was successful, stop the process using `ctrl+c`, then close the terminal using `exit`.
 
-*:exclamation: ==Linux Tip== - the command `ctrl+c` stops any processes running in that terminal, be careful if copy/pasting*  
+*:exclamation: Linux Tip - the command `ctrl+c` stops any processes running in that terminal, be careful if copy/pasting*  
 
 What is `roscore`?  It starts the ROS master node.  What does that even mean?  We will cover that later!
 
@@ -69,11 +69,11 @@ Exit terminal
 
 Open a new terminal, this should start you in your "home" directory (identified with a `~`).  Double check you are in the home directory with `cd ~`.
 
-*:exclamation: ==Linux Tip== - the `cd` command means "change directory"*  
+*:exclamation: Linux Tip - the `cd` command means "change directory"*  
 
 Create a new directory called "catkin_ws" using `mkdir catkin_ws`.  Move into that directory with `cd catkin_ws`.  Move to the new directory and make another directory called "src" using `cd catkin_ws` followed by `mkdir src`.
 
-*:exclamation: ==Linux Tip== - the `mkdir` makes new directories, using the `-p` option can make sub directories and the parents in one go, e.g. `mkdir -p ~/catkin_ws/src`*  
+*:exclamation: Linux Tip - the `mkdir` makes new directories, using the `-p` option can make sub directories and the parents in one go, e.g. `mkdir -p ~/catkin_ws/src`*  
 
 #### Building the Catkin Workspace
 
@@ -119,11 +119,11 @@ This tutorial will use some basic dependancies to demonstrate how to create a pa
 catkin_create_pkg example_package rospy roscpp std_msgs
 ```
 
-*:sparkles:==ROS Tip== - `rospy` and `roscpp` dependancies are for python and C++ functionality respectively, these are usually always required*
+*:sparkles:ROS Tip - `rospy` and `roscpp` dependancies are for python and C++ functionality respectively, these are usually always required*
 
 Navigate to the `catkin_ws` directory using `cd ..` (or absolute path `cd ~/catkin_ws`), and use `catkin build`.  Some action should happen in the terminal, and your package should now be established.
 
-*:exclamation: ==Linux Tip== - `..` means up one directory level*  
+*:exclamation: Linux Tip - `..` means up one directory level*  
 
 Check the package is availble to the system.  Open a new terminal and use the command `rospack list | grep example_package`, where example is the name of the package in this case.  If this works, you should get a result similar to below.
 
@@ -132,9 +132,9 @@ user@machine:~$ rospack list | grep example_package
 example_package /home/user/catkin_ws/src/example_package
 ```
 
-*:sparkles:==ROS Tip== - All available ROS packages can be seen using `rospack`*  
-*:exclamation: ==Linux Tip== - the pipe `|` literally "pipes" the output of one function into another, very useful*  
-*:exclamation: ==Linux Tip== - `grep` performs a partial string match (search)* 
+*:sparkles:ROS Tip - All available ROS packages can be seen using `rospack`*  
+*:exclamation: Linux Tip - the pipe `|` literally "pipes" the output of one function into another, very useful*  
+*:exclamation: Linux Tip - `grep` performs a partial string match (search)* 
 
 #### :boom:EXERCISE 0.2 | COMPRESSED INSTRUCTIONS:boom:
 Open terminal
@@ -154,7 +154,7 @@ Navigate to your new package using `roscd example_package`.  That's right, ROS h
 
 Make a directory called "scripts" using `mkdir scripts` in the example_package directory.
 
-*:sparkles:==ROS Tip== - Python code lives in a "scripts" directory in a package, whereas C++ code lives in a "src" directory in a package*  
+*:sparkles:ROS Tip - Python code lives in a "scripts" directory in a package, whereas C++ code lives in a "src" directory in a package*  
 
 #### :boom:EXERCISE 1.0 | COMPRESSED INSTRUCTIONS:boom:
 Open terminal
@@ -183,7 +183,7 @@ Open a terminal and start the ROS master node with `roscore`.  Open a new termin
 
 Open a third terminal or tab, and manually publish data on the correct topic name using `rostopic pub -r 1 /counter std_msgs/Int32 "data: 42"`.  Go back to the terminal running the subscriber node and witness the logging information mirror the incoming message.
 
-*:exclamation: ==Linux Tip== - the `tab` key can be used to autocomplete in the terminal*  
+*:exclamation: Linux Tip - the `tab` key can be used to autocomplete in the terminal*  
 
 ***
 ### Exercise 1.2 | Write a Publisher Node
