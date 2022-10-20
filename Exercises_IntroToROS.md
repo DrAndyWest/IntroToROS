@@ -60,6 +60,28 @@ roscore
 Exit terminal
 
 ***
+## Installing ROS Packages
+***
+### Install from ROS Repositories
+Many common (and likely most stable) packages are freely available and documented on the [ROS Wiki](http://wiki.ros.org/).  Double check that the package is available for your ROS version (Noetic).
+
+This exercise will demonstrate how to install an existing supported ROS package via the command line.  We will install the very useful '[rosserial](http://wiki.ros.org/rosserial)' package, allowing microcontrollers (such as Arduino compatible units) and other hardware/software to talk with ROS.
+
+Open a new terminal session with `ctrl + alt + t`, enter the command:
+`sudo apt install ros-noetic-rosserial`
+
+
+The 'apt' portion is the command to find/install/remove software via terminal, followed by the 'install' command (`apt install`).  Finally, the package is defined by ros-\<version\>-\<package name\> (`ros-noetic-rosserial`).  If you are unsure of the exact name of a package, using Tab completion can help.
+
+*:exclamation: Linux Tip - The `sudo` part means that administrator priviledges are required (in this case install software), the terminal may ask for your password*  
+*:exclamation: Linux Tip - The 'Tab' key can be used to autocomplete when using the terminal, this can save time, reduce typos, and help when you can't quite remember what something is called*
+
+### Install from Source
+
+Installing from source typically means downloading the source code, and compiling it locally.  On most occasions any ROS code is likely freely available from somewhere like [Github](github.com), hopefully with some instructions for installation.  How to use git will not be covered here, but regardless of where the code comes from, it will need to be copied into your 'Catkin Workspace' src directory.  The next section will cover setting up the workspace and compiling code.
+
+
+***
 ## :robot: Writing Your First Node
 ***
 ### Exercise 0.1 | Setting Up Your Catkin Workspace
@@ -123,7 +145,7 @@ catkin_create_pkg example_package rospy roscpp std_msgs
 
 *:sparkles:ROS Tip - `rospy` and `roscpp` dependancies are for python and C++ functionality respectively, these are usually always required*
 
-Navigate to the `catkin_ws` directory using `cd ..` (or absolute path `cd ~/catkin_ws`), and use `catkin build`.  Some action should happen in the terminal, and your package should now be established.
+Navigate to the `catkin_ws` directory using `cd ..` (or absolute path `cd ~/catkin_ws`), and use `catkin_make`.  Some action should happen in the terminal, and your package should now be established.
 
 *:exclamation: Linux Tip - `..` means up one directory level*  
 
@@ -177,7 +199,7 @@ Tasks to complete:
 - [ ] Add a subscriber callback function
 - [ ] Output a [rospy info log](http://wiki.ros.org/rospy/Overview/Logging) message when a new message has been received
 
-It is a good habit to `catkin build` when changes have been made to a node.  This is not necessary for python, but it is necessary to recompile C++ code before running.
+It is a good habit to `catkin_make` when changes have been made to a node.  This is not necessary for python, but it is necessary to recompile C++ code before running.
 
 Ensure the python code is executable.  Through the terminal use `roscd example_package/scripts/` followed by `chmod +x subscriber_node.py`.  This only needs to be done once.
 
@@ -185,7 +207,9 @@ Open a terminal and start the ROS master node with `roscore`.  Open a new termin
 
 Open a third terminal or tab, and manually publish data on the correct topic name using `rostopic pub -r 1 /counter std_msgs/Int32 "data: 42"`.  Go back to the terminal running the subscriber node and witness the logging information mirror the incoming message.
 
-*:exclamation: Linux Tip - the `tab` key can be used to autocomplete in the terminal*  
+*:exclamation: Linux Tip - the `Tab` key can be used to autocomplete in the terminal*  
+*:sparkles:ROS Tip - Using the additional command `-r 1` means publish the data at a rate of 1 Hz, without this the data is published just once*  
+
 
 ***
 ### Exercise 1.2 | Write a Publisher Node
@@ -231,9 +255,16 @@ Launch files can be quite sophisicated, with arguments and variables.  Check out
 ### Exercise 3.0 | Writing a Service Server
 ***
 
-Services provide intermittent functionality for sending messages or performing tasks, without needing to publish messages at a constant rate.  This can be useful for turning on LEDs, playing a sound etc.
+Services provide intermittent functionality for sending messages or performing tasks, without needing to publish messages at a constant rate.  This can be useful for turning on/off LEDs, playing a sound etc.
 
 Services can be defined in a package, however, in this exercise we will use preexisting service structures.  Check out the [ROS Wiki Tutorial](http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29) for details.
 
 Using the std_srvs/Trigger service, create a simple service.  There is an example on [Github](https://github.com/DrAndyWest/IntroToROS).
+
+Tasks to complete:
+
+- [ ] Run the service node and make calls to it via terminal and GUI interfaces
+- [ ] After reading the tutorials, write your own service to accept an incoming primative type (e.g. std_msgs/Int32) and return a string with some text and the received data (remember - changes to package.xml and CMake.txt will be necessary)
+
+To make a service call via the terminal, use `rosservice list` to find the service of interest, then `rosservice call` using Tab completion to fill in the rest.
 
